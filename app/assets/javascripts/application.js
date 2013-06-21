@@ -16,5 +16,5 @@
 
 setTimeout(function() {
 	$('#notice').slideUp()
-}, 10000);
+}, 5000);
 

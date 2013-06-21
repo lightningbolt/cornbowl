@@ -14,7 +14,8 @@ class TossesController < ApplicationController
   def create
     @toss = Toss.where(:frame_id => params[:frame_id], :number => params[:number]).first_or_initialize
     @toss.score = params[:score]
-
+    
+    WebsocketRails[@toss.frame.game.id.to_s].trigger(:tossed, { :frame_id => @toss.frame.id.to_s, :number => @toss.number, :score => @toss.score })
     respond_to do |format|
       if @toss.save
         format.json { render json: @toss, status: :created, location: @toss }
