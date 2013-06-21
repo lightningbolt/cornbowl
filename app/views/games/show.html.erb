@@ -1,0 +1,16 @@
+<div class="frame-labels">
+  <% 10.times.each_with_index do |i| %>
+  	<span><%= i+1 %></span>
+  <% end %>
+</div>
+
+<%- @cornbowlers.each_with_index do |bowler, i| -%>
+  <%= render :partial => 'player_row', :locals => {:player => bowler, :player_index => i, :player_frames => @frames[bowler.id], :player_total => @cornbowlers.size } -%>
+<%- end -%>
+
+<%= render( :partial => 'buttons' ) %>
+
+<input type="hidden" id="game-id" value="<%= @game.id %>" />
+
+<%= stylesheet_link_tag "score_card", :media => "all" %>
+<%= javascript_include_tag "score_card" %>

@@ -1,0 +1,9 @@
+<h1>Login</h1>
+
+<%= form_tag('/cornbowlers/auth', :method => 'post') do %>
+  <%= label_tag(:name, "Name:") %>
+  <%= text_field_tag(:name) %>
+  <%= submit_tag(:login) %>
+<% end %>
+
+<%= stylesheet_link_tag "cornbowlers", :media => "all" %>

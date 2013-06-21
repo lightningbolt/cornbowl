@@ -1,0 +1,24 @@
+<h1>Listing cornbowlers</h1>
+
+<table class="content">
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cornbowlers.each do |cornbowler| %>
+  <tr>
+    <td><%= cornbowler.name %></td>
+    <td><%= link_to 'Show', cornbowler %></td>
+    <td><%= link_to 'Edit', edit_cornbowler_path(cornbowler) %></td>
+    <td><%= link_to 'Destroy', cornbowler, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cornbowler', new_cornbowler_path %>
+<%= stylesheet_link_tag "cornbowlers", :media => "all" %>

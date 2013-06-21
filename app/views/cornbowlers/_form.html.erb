@@ -1,0 +1,19 @@
+<%= form_for(@cornbowler) do |f| %>
+  <% if @cornbowler.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cornbowler.errors.count, "error") %> prohibited this cornbowler from being saved:</h2>
+
+      <ul>
+      <% @cornbowler.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

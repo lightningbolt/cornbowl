@@ -1,0 +1,2 @@
+module TossesHelper
+end

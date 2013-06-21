@@ -1,0 +1,75 @@
+// Place all the styles related to the score_card controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.game, .frame-labels {
+  padding: 10px;
+}
+
+.player {
+  height: 66px;
+  width: 200px;
+  line-height: 66px;
+  border: 2px solid #CCC;
+  padding-right: 20px;
+  font-size: 30px;
+  vertical-align: top;
+  background: white;
+  display: inline-block;
+}
+
+.frame {
+  background: white;
+  border: 2px solid black;
+  height: 66px;
+  width: 66px;
+  display: inline-block;
+}
+
+.frame:last-child {
+  width: 99px;
+}
+
+.tosses input {
+  border: none;
+  width: 33px;
+  height: 33px;
+  color: #333;
+  font-size: 20px;
+  margin-right: -2px;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+  float: left;
+}
+
+.tosses input:first-child {
+  border: none;
+}
+
+.score {
+  line-height: 40px;
+  text-align: center;
+}
+
+.frame-labels {
+  padding-left: 160px;
+  padding-bottom: 0px;
+  margin-bottom: -10px;
+}
+
+.frame-labels span {
+  display: inline-block;
+  width: 70px;
+  color: white;
+  font-size: 10px;
+}
+
+#buttons {
+  text-align: right;
+  padding-right: 40px;
+}
+
+.toss_button {
+  padding: 20px 0 0 10px;
+  cursor: pointer;
+}

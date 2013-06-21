@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<ul class="content">
+  <li>Id: <span><%= @cornbowler.id %></span></li>
+  <li>Name: <span><%= @cornbowler.name %></span></li>
+  <li>Record: <span><%= @cornbowler.record %></span></li>
+  <li>Average Score: <span><%= number_with_precision @cornbowler.average_final_score, :precision => 1 %></span></li>
+  <li>Ace %: <span><%= number_with_precision @cornbowler.ace_percentage %></span></li>
+  <li>Cornhole %: <span><%= number_with_precision @cornbowler.cornhole_percentage %></span></li>
+  <li>Field Goal %: <span><%= number_with_precision @cornbowler.field_goal_percentage %></span></li>
+  <li>Spare %: <span><%= number_with_precision @cornbowler.spare_percentage %></span></li>
+  <li>Strike %: <span><%= number_with_precision @cornbowler.strike_percentage %></span></li>
+</ul>
+<%= link_to 'Edit', edit_cornbowler_path(@cornbowler) %> |
+<%= link_to 'Back', cornbowlers_path %>
+
+<%= stylesheet_link_tag "cornbowlers", :media => "all" %>

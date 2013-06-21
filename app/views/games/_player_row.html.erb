@@ -1,0 +1,20 @@
+<div class="game">
+  <span class="player" data-id="<%= player.id %>"><%= player.name -%></span>
+  <% player_frames[0..8].each do |frame| %>
+    <div class="frame" data-id="<%= frame.id %>">
+      <div class="tosses">
+        <input type="text" size="1" tabindex="<%= 2 * ((frame.number - 1) * player_total + player_index) + 1 -%>" value="<%= frame.toss_formatted_score(0) %>" maxlength="1" disabled="disabled" data-number="0" />
+        <input type="text" size="1" tabindex="<%= 2 * ((frame.number - 1) * player_total + player_index) + 2 -%>" value="<%= frame.toss_formatted_score(1) %>" maxlength="1" disabled="disabled" data-number="1" />
+      </div>
+      <span class="score">&nbsp;</span>
+    </div>
+  <% end %>
+  <div class="frame" data-id="<%= player_frames[9].id %>">
+    <div class="tosses">
+      <input type="text" size="1" tabindex="<%= 2 * (9 * player_total + player_index) + 1 + player_index -%>" value="<%= player_frames[9].toss_formatted_score(0) %>" maxlength="1" disabled="disabled" data-number="0" />
+      <input type="text" size="1" tabindex="<%= 2 * (9 * player_total + player_index) + 2 + player_index -%>" value="<%= player_frames[9].toss_formatted_score(1) %>" maxlength="1" disabled="disabled" data-number="1" />
+      <input type="text" size="1" tabindex="<%= 2 * (9 * player_total + player_index) + 3 + player_index -%>" value="<%= player_frames[9].toss_formatted_score(2) %>" maxlength="1" disabled="disabled" data-number="2" />
+    </div>
+    <span class="score">&nbsp;</span>
+  </div>
+</div>

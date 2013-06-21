@@ -1,0 +1,11 @@
+<h1>Listing games</h1>
+
+<ol>
+<% @games.each do |game| %>
+  <li ><%= link_to('Join', "/games/#{game.id}") %><%= game.cornbowlers.map {|c| c.name }.join(', ') %></li>
+<% end %>
+</ol>
+
+
+<%= link_to('Create New Game', "/games/new") %>
+
