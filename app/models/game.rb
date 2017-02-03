@@ -2,8 +2,8 @@ class Game < ActiveRecord::Base
   include ActiveUUID::UUID
 
   has_many :cornbowlers, :through => :matchups
-  has_many :frames
-  has_many :matchups
+  has_many :frames, :dependent => :destroy
+  has_many :matchups, :dependent => :destroy
 
   before_save :record_start_time
   after_create :create_frames

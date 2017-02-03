@@ -2,11 +2,11 @@ class Cornbowler < ActiveRecord::Base
   include ActiveUUID::UUID
   
   has_many :frames
-  has_many :games, :through => :matchups
-  has_many :matchups
-  has_many :tosses, :through => :frames  
+  has_many :games, :through => :matchups, :dependent => :destroy
+  has_many :matchups, :dependent => :destroy
+  has_many :tosses, :through => :frames
 
-  has_one :standing
+  has_one :standing, :dependent => :destroy
 
   after_create :create_standing
  

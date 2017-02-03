@@ -3,7 +3,7 @@ class Frame < ActiveRecord::Base
 
   belongs_to :game
   belongs_to :cornbowler
-  has_many :tosses
+  has_many :tosses, :dependent => :destroy
 
   validates_uniqueness_of :number, :scope => [:game_id, :cornbowler_id]
 
