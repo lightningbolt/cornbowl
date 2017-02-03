@@ -49,12 +49,17 @@ class Frame < ActiveRecord::Base
     if self.tenth_frame?
       0
     elsif (first_toss = self.toss(0)).present? && first_toss.strike?
-      Toss.select("tosses.score").
-           joins(:frame).
-           where(:frame_id => self.next_frame_ids(2)).
-           order("frames.number ASC, tosses.number ASC").
-           limit(2).
-           sum(&:score)
+      tosses = Toss.select("tosses.score").
+                    joins(:frame).
+                    where(:frame_id => self.next_frame_ids(2)).
+                    order("frames.number ASC, tosses.number ASC").
+                    limit(2)
+      # if next two tosses are in the same frame and that frame is a spare, then the compound score is 3 and not the sum of the two frames
+      if (tosses[0].frame_id == tosses[1].frame_id) && tosses[1].spare?
+        3
+      else
+        tosses.sum(&:score)
+      end 
     elsif (second_toss = self.toss(1)).present? && second_toss.spare?
       Toss.select("tosses.score").
            joins(:frame).

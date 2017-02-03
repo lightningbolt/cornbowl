@@ -245,7 +245,11 @@ $(document).ready(function() {
     },
     value: function() {
       if(this.isStrike()) {
-        return 3 + this.sumTosses(this.futureTosses(2));
+        nextTwoTosses = this.futureTosses(2)
+        if (nextTwoTosses[0] == 1 && nextTwoTosses[1] == 3) {
+          return 6
+        }
+        return 3 + this.sumTosses(nextTwoTosses);
       }
       else if(this.isSpare() && this.frame != 10) {
         return 3 + this.sumTosses(this.futureTosses(1));
