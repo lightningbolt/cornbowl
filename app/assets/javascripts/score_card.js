@@ -91,7 +91,7 @@ $(document).ready(function() {
       if(map[$(toss).val()] == 3 && index % 2 == 0 && frame != 10) {
         index++;
       }
-      else if(index == 19 && (map[$(toss).val()] == 1 || map[$(toss).val()] == 0)) {
+      else if(index == 19 && (map[$(toss).val()] == 1 || map[$(toss).val()] == 0) && (map[$(tosses.eq(18)).val()] != 3)) {
         return;
       }
       index++;
