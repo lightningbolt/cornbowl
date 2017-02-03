@@ -1,0 +1,24 @@
+<h1>All-time High Scores</h1>
+
+<table class="content">
+  <tr>
+    <th>Rank</th>
+    <th>Score</th>
+    <th>Cornbowler</th>
+    <th></th>
+  </tr>
+
+<% @high_scores_with_rank.each do |high_score| %>
+  <tr>
+    <td><%= high_score[:rank].present? ? "#{high_score[:rank]}." : '' %></td>
+    <td><%= high_score[:matchup].final_score %></td>
+    <td><%= high_score[:matchup].cornbowler_name %></td>
+    <td><%= link_to 'View game',  high_score[:matchup].game %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to('Cornbowlers', cornbowlers_path) %>
+
+<%= stylesheet_link_tag "matchups", :media => "all" %>
