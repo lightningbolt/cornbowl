@@ -104,15 +104,20 @@ $(document).ready(function() {
     enableGameTosses: function(game, toss) {
       if($(toss).val() != '') {
         var next = this.enableNextToss(game, toss);
-        this.enableGameTosses(game, next);
+        if (next) {
+          this.enableGameTosses(game, next);
+        }
       }
     },
     selectCurrentToss: function() {
-      $('.game input').not('[disabled]').filter(function(e) {
+      var firstSelectableToss = $('.game input').not('[disabled]').filter(function(e) {
         return $(this).val() == '';
       }).sort(function(a, b) {
         return a.tabIndex - b.tabIndex;
-      })[0].focus();
+      })[0];
+      if (firstSelectableToss) {
+        firstSelectableToss.focus();
+      }
     },
     enableTosses: function() {
       $('.game').each(function(index) {
