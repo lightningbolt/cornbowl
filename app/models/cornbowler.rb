@@ -28,6 +28,10 @@ class Cornbowler < ActiveRecord::Base
     self.tosses.where(:score => [1,3]).count / self.tosses.count.to_f
   end
 
+  def high_score
+    completed_matchups.maximum(:final_score)
+  end
+
   def record
     standing = self.standing
     "#{standing.wins}-#{standing.losses}-#{standing.ties}"
