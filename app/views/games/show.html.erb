@@ -12,6 +12,10 @@
 
 <input type="hidden" id="game-id" value="<%= @game.id %>" />
 
+<br />
+
+<%= link_to 'Return to games', games_path %>
+
 <%= stylesheet_link_tag "score_card", :media => "all" %>
 <%= javascript_include_tag "score_card" %>
 <%= javascript_include_tag "broadcast" %>
