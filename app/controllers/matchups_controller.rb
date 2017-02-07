@@ -10,11 +10,14 @@ class MatchupsController < ApplicationController
 
     rank = 1
     @high_scores_with_rank = @matchups.map.with_index do |matchup, i|
-      previous_matchup = @matchups[i - 1]
-      if previous_matchup && previous_matchup.final_score > matchup.final_score
-        rank = i + 1
-      elsif previous_matchup && previous_matchup.final_score == matchup.final_score
-        rank = nil
+      previous_index = i - 1
+      if previous_index >= 0
+        previous_matchup = @matchups[previous_index]
+        if previous_matchup && previous_matchup.final_score > matchup.final_score
+          rank = i + 1
+        elsif previous_matchup && previous_matchup.final_score == matchup.final_score
+          rank = nil
+        end
       end
       {:rank => rank, :matchup => matchup}
     end
