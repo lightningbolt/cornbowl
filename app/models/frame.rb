@@ -72,6 +72,10 @@ class Frame < ActiveRecord::Base
     end
   end
 
+  def matchup
+    Matchup.where(:cornbowler_id => self.cornbowler_id, :game_id => self.game_id).first
+  end
+
   def open_frame?
     !self.closed_frame?
   end
@@ -86,8 +90,12 @@ class Frame < ActiveRecord::Base
   end
 
   def raw_score
-    raw_score = Toss.where(:frame_id => self.id).sum(:score)
-    !self.tenth_frame? && raw_score > 3 ? 3 : raw_score    
+    if self.tenth_frame? && toss(1).spare?
+      3 + toss(2).score
+    else
+      raw_score = Toss.where(:frame_id => self.id).sum(:score)
+      raw_score > 3 ? 3 : raw_score    
+    end
   end
 
   def tenth_frame?
