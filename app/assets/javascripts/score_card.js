@@ -137,7 +137,16 @@ $(document).ready(function() {
 
       game.find('.score').each(function(index, span) {
         card.frame = index + 1;
-        $(span).html(card.isFrameBlank() ? '&nbsp;' : card.sum());
+        if (card.frame != 10 && card.isStrike()) {
+          canDisplay = card.futureTosses(2).filter(function(n){ return n != undefined }).length == 2;
+        }
+        else if (card.frame != 10 && card.isSpare()) {
+          canDisplay = card.futureTosses(1).filter(function(n){ return n != undefined }).length == 1;
+        }
+        else {
+          canDisplay = card.isFrameComplete();
+        }
+        $(span).html(canDisplay ? card.sum() : '&nbsp;');
       });
     },
     advanceFocus: function(toss) {
@@ -221,20 +230,20 @@ $(document).ready(function() {
         x = 2;
       }
 
-      for(var i=0; i<4; i++) {
+      for(var i=0; i<(21 - index); i++) {
         toss = this.scores[index + i];
         if(!isNaN(toss)) {
           futureTosses.push(toss);
         }
       }
       futureTosses.length = x || 2;
-      return futureTosses;
+      return futureTosses.filter(function(n){ return n != undefined });
     },
     isStrike: function() {
       return this.scores[(this.frame-1)*2] == 3;
     },
     isSpare: function() {
-      return this.scores[((this.frame-1)*2)+1] == 3;
+      return this.scores[(this.frame-1)*2] !=3 && this.scores[((this.frame-1)*2)+1] == 3;
     },
     sum: function() {
       if(this.frame == 0) {
@@ -249,7 +258,10 @@ $(document).ready(function() {
       }
     },
     value: function() {
-      if(this.isStrike()) {
+      if(this.frame == 10 && this.isSpare()) {
+        return 3 + this.tosses()[2];
+      }
+      else if(this.isStrike()) {
         nextTwoTosses = this.futureTosses(2)
         if (nextTwoTosses[0] == 1 && nextTwoTosses[1] == 3) {
           return 6
@@ -271,6 +283,16 @@ $(document).ready(function() {
     isFrameBlank: function() {
       var tosses = this.tosses();
       return isNaN(tosses[0]) && isNaN(tosses[1]);
+    },
+    isFrameComplete: function() {
+      var tosses = this.tosses();
+      if (this.frame == 10 && (tosses[0] == 3 || tosses[1] == 3)) {
+        isComplete = (typeof tosses[0]==='number' && (tosses[0]%1)===0) && (typeof tosses[1]==='number' && (tosses[1]%1)===0) && (typeof tosses[2]==='number' && (tosses[2]%1)===0);
+      }
+      else {
+        isComplete = (tosses[0] == 3) || (typeof tosses[0]==='number' && (tosses[0]%1)===0) && (typeof tosses[1]==='number' && (tosses[1]%1)===0);
+      }
+      return isComplete;
     }
   };
 
