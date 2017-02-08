@@ -1,0 +1,24 @@
+<h1>Highest Averages</h1>
+
+<table class="content">
+  <tr>
+    <th>Rank</th>
+    <th>Average</th>
+    <th>Cornbowler</th>
+    <th>Games Played</th>
+  </tr>
+
+<% @averages_with_rank.each do |average| %>
+  <tr>
+    <td><%= average[:rank].present? ? "#{average[:rank]}." : '' %></td>
+    <td><%= number_with_precision average[:object].average_score, :precision => 1 %></td>
+    <td><%= average[:object].cornbowler_name %></td>
+    <td><%= average[:object].count %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to('Cornbowlers', cornbowlers_path) %>
+
+<%= stylesheet_link_tag "matchups", :media => "all" %>

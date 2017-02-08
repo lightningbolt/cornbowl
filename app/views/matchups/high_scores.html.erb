@@ -11,9 +11,9 @@
 <% @high_scores_with_rank.each do |high_score| %>
   <tr>
     <td><%= high_score[:rank].present? ? "#{high_score[:rank]}." : '' %></td>
-    <td><%= high_score[:matchup].final_score %></td>
-    <td><%= high_score[:matchup].cornbowler_name %></td>
-    <td><%= link_to 'View game',  high_score[:matchup].game %></td>
+    <td><%= high_score[:object].final_score %></td>
+    <td><%= high_score[:object].cornbowler_name %></td>
+    <td><%= link_to 'View game',  high_score[:object].game %></td>
   </tr>
 <% end %>
 </table>
