@@ -2,7 +2,7 @@ class CornbowlersController < ApplicationController
   # GET /cornbowlers
   # GET /cornbowlers.json
   def index
-    @cornbowlers = Cornbowler.all
+    @cornbowlers = Cornbowler.order("name ASC").all
 
     respond_to do |format|
       format.html # index.html.erb

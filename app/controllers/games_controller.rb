@@ -29,7 +29,7 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
-    @cornbowlers = Cornbowler.all
+    @cornbowlers = Cornbowler.order("name ASC").all
 
     respond_to do |format|
       format.html # new.html.erb
