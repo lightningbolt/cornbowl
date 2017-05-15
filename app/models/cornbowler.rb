@@ -12,20 +12,36 @@ class Cornbowler < ActiveRecord::Base
  
   validates :name, :uniqueness => { :case_sensitive => false }, :allow_blank => false
 
+  def ace_count
+    self.tosses.where(:score => 1).count
+  end
+
   def ace_percentage
-    self.tosses.where(:score => 1).count / self.tosses.count.to_f
+    ace_count / toss_count.to_f
   end
 
   def average_final_score
     completed_matchups.average(:final_score)
   end
 
+  def cornhole_count
+    self.tosses.where(:score => 3).count
+  end
+
   def cornhole_percentage
-    self.tosses.where(:score => 3).count / self.tosses.count.to_f
+    cornhole_count / toss_count.to_f
+  end
+
+  def effective_field_goal_percentage
+    (ace_count + (2 * cornhole_count)) / toss_count.to_f
+  end
+
+  def field_goal_count
+    self.tosses.where(:score => [1,3]).count
   end
 
   def field_goal_percentage
-    self.tosses.where(:score => [1,3]).count / self.tosses.count.to_f
+    field_goal_count / toss_count.to_f
   end
 
   def high_score
@@ -47,6 +63,10 @@ class Cornbowler < ActiveRecord::Base
     strike_opportunities = tosses_with_previous_toss.where("previous_tosses.score = 3 OR tosses.number IN(0,2)")
     strikes_scored = strike_opportunities.where(:tosses => {:score => 3})
     strikes_scored.count / strike_opportunities.count.to_f
+  end
+
+  def toss_count
+    self.tosses.count
   end
 
   private
